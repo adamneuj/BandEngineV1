@@ -173,6 +173,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911220209436_Init.cs" />
+    <Compile Include="Migrations\201911220209436_Init.Designer.cs">
+      <DependentUpon>201911220209436_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911220220050_AddModelsFromERD.cs" />
+    <Compile Include="Migrations\201911220220050_AddModelsFromERD.Designer.cs">
+      <DependentUpon>201911220220050_AddModelsFromERD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -265,6 +273,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911220209436_Init.resx">
+      <DependentUpon>201911220209436_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911220220050_AddModelsFromERD.resx">
+      <DependentUpon>201911220220050_AddModelsFromERD.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

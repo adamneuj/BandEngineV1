@@ -20,9 +20,23 @@ namespace BandEngine.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Artist> Artists { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<ArtistTask> ArtistTasks { get; set; }
+        public DbSet<MailingList> MailingLists { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Email> Emails { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Concert> Concerts { get; set; }
+        public DbSet<SetList> SetLists { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Song> Songs { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+
         }
 
         public static ApplicationDbContext Create()
