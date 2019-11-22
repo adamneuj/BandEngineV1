@@ -131,7 +131,25 @@ namespace BandEngine.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+                Address addressFromDb = context.Addresses.FirstOrDefault(a => a.AddressId == contactFromDb.AddressId);
+                Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == contactFromDb.EmailId);
+
+                contactFromDb.FirstName = contactInfo.Contact.FirstName;
+                contactFromDb.LastName = contactInfo.Contact.LastName;
+                contactFromDb.PhoneNumber = contactInfo.Contact.PhoneNumber;
+                contactFromDb.Role = contactInfo.Contact.Role;
+                contactFromDb.Company = contactInfo.Contact.Company;
+
+                addressFromDb.AddressLine1 = contactInfo.Address.AddressLine1;
+                addressFromDb.AddressLine2 = contactInfo.Address.AddressLine2;
+                addressFromDb.City = contactInfo.Address.City;
+                addressFromDb.State = contactInfo.Address.State;
+                addressFromDb.ZipCode = contactInfo.Address.ZipCode;
+
+                emailFromDb.EmailAddress = contactInfo.Email.EmailAddress;
+
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -144,21 +162,38 @@ namespace BandEngine.Controllers
         // GET: Contact/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Contact contact = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+            return View(contact);
         }
 
         // POST: Contact/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Contact contact)
         {
             try
             {
-                // TODO: Add delete logic here
+
+                List<Conversation> conversations = context.Conversations.Where(c => c.ContactId == id).ToList();
+
+                foreach(Conversation conversation in conversations)
+                {
+                    context.Conversations.Remove(conversation);
+                }
+                Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+                Address addressFromDb = context.Addresses.FirstOrDefault(a => a.AddressId == contactFromDb.AddressId);
+                Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == contactFromDb.EmailId);
+
+                context.Addresses.Remove(addressFromDb);
+                context.Emails.Remove(emailFromDb);
+                context.Contacts.Remove(contactFromDb);
+
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return View();
             }
         }
