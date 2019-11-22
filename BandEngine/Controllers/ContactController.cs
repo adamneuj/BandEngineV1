@@ -52,7 +52,7 @@ namespace BandEngine.Controllers
                 contactFromDb.NextContact = conversationInfo.Contact.NextContact;
                 context.Conversations.Add(conversation);
                 context.SaveChanges();
-                return RedirectToAction("Conversations", id);
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
