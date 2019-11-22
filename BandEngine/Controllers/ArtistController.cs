@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BandEngine.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,11 @@ namespace BandEngine.Controllers
 {
     public class ArtistController : Controller
     {
+        ApplicationDbContext db;
+        public ArtistController()
+        {
+            db = new ApplicationDbContext();
+        }
         // GET: Artist
         public ActionResult Index()
         {
@@ -24,12 +30,13 @@ namespace BandEngine.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            ArtistCreation artistInfo = new ArtistCreation();
+            return View(artistInfo);
         }
 
         // POST: Artist/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ArtistCreation artistInfo)
         {
             try
             {
