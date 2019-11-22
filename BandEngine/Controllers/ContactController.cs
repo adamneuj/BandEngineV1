@@ -28,26 +28,15 @@ namespace BandEngine.Controllers
         [Authorize]
         public ActionResult Conversations(int id)
         {
-            Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
-            Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == contactFromDb.EmailId);
-            ConversationViewModel conversationInfo = new ConversationViewModel();
-            conversationInfo.AllConversations = context.Conversations.Where(c => c.ContactId == contactFromDb.ContactId).ToList();
-            conversationInfo.Contact = contactFromDb;
-            conversationInfo.Email = emailFromDb;
+            ConversationViewModel conversationInfo = GetConversationInfo(id);
             return View(conversationInfo);
         }
 
-        [HttpPost]
-        public ActionResult Conversations(ConversationViewModel conversationInfo, int id)
+        [Authorize]
+        public ActionResult CreateConversation(int id)
         {
-            try
-            {
-                return View(id);
-            }
-            catch
-            {
-                return View(id);
-            }
+            ConversationViewModel conversationInfo = GetConversationInfo(id);
+            return View(conversationInfo);
         }
 
         // GET: Contact/Details/5
@@ -161,6 +150,18 @@ namespace BandEngine.Controllers
             string userId = GetArtistApplicationId();
             var artist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
             return artist.ArtistId;
+        }
+
+        private ConversationViewModel GetConversationInfo(int id)
+        {
+            Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+            Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == contactFromDb.EmailId);
+            ConversationViewModel conversationInfo = new ConversationViewModel();
+            conversationInfo.AllConversations = context.Conversations.Where(c => c.ContactId == contactFromDb.ContactId).ToList();
+            conversationInfo.Contact = contactFromDb;
+            conversationInfo.Email = emailFromDb;
+            conversationInfo.ContactName = conversationInfo.Contact.FirstName + " " + conversationInfo.Contact.LastName;
+            return conversationInfo;
         }
     }
 }

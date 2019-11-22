@@ -7,7 +7,7 @@
 <h2>Conversations</h2>
 
 <div>
-    <h4>Conversation</h4>
+    <h4>@Model.ContactName</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Contact.FirstName + " " + model.Contact.LastName)
+            @Html.DisplayFor(model => model.ContactName)
         </dd>
 
         <dt>

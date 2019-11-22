@@ -27,6 +27,7 @@ namespace BandEngine.Models
         public Conversation Conversation { get; set; }
         public Email Email { get; set; }
         public List<Conversation> AllConversations { get; set; }
+        public string ContactName { get; set; }
 
     }
 }
