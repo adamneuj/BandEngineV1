@@ -21,10 +21,6 @@ namespace BandEngine.Models
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }
 
-        [ForeignKey("SetList")]
-        public int SetListId { get; set; }
-        public virtual SetList SetList { get; set; }
-
         [ForeignKey("Artist")]
         public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }

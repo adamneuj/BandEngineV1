@@ -18,6 +18,7 @@ namespace BandEngine.Models
         public int AddressId { get; set; }
         public virtual Address Address { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
         public int PhoneNumber { get; set; }
 
         [ForeignKey("Email")]

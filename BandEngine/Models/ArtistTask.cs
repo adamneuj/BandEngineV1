@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BandEngine.Models
 {
-    public class Task
+    public class ArtistTask
     {
         [Key]
         public int TaskId { get; set; }
