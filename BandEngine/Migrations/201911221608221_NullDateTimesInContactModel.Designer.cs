@@ -7,13 +7,13 @@ namespace BandEngine.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class NullDateTimesInContactModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NullDateTimesInContactModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911220209436_Init"; }
+            get { return "201911221608221_NullDateTimesInContactModel"; }
         }
         
         string IMigrationMetadata.Source

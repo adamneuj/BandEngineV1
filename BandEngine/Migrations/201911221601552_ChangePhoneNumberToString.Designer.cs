@@ -7,13 +7,13 @@ namespace BandEngine.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UpdateEmailTable : IMigrationMetadata
+    public sealed partial class ChangePhoneNumberToString : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateEmailTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangePhoneNumberToString));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911221431410_UpdateEmailTable"; }
+            get { return "201911221601552_ChangePhoneNumberToString"; }
         }
         
         string IMigrationMetadata.Source

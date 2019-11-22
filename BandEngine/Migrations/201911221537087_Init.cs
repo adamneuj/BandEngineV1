@@ -3,7 +3,7 @@ namespace BandEngine.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddModelsFromERD : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -55,6 +55,64 @@ namespace BandEngine.Migrations
                 .Index(t => t.ApplicationId);
             
             CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
                 "dbo.ArtistTasks",
                 c => new
                     {
@@ -94,6 +152,7 @@ namespace BandEngine.Migrations
                         AddressId = c.Int(nullable: false),
                         PhoneNumber = c.Int(nullable: false),
                         EmailId = c.Int(nullable: false),
+                        WebSite = c.String(),
                         Company = c.String(),
                         Role = c.String(),
                         LastContact = c.DateTime(nullable: false),
@@ -145,6 +204,16 @@ namespace BandEngine.Migrations
                 .Index(t => t.ArtistId);
             
             CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
                 "dbo.SetLists",
                 c => new
                     {
@@ -184,6 +253,7 @@ namespace BandEngine.Migrations
             DropForeignKey("dbo.Songs", "ArtistId", "dbo.Artists");
             DropForeignKey("dbo.Songs", "AlbumId", "dbo.Albums");
             DropForeignKey("dbo.SetLists", "ConcertId", "dbo.Concerts");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.MailingLists", "EmailId", "dbo.Emails");
             DropForeignKey("dbo.MailingLists", "ArtistId", "dbo.Artists");
             DropForeignKey("dbo.Conversations", "ContactId", "dbo.Contacts");
@@ -195,11 +265,15 @@ namespace BandEngine.Migrations
             DropForeignKey("dbo.ArtistTasks", "ArtistId", "dbo.Artists");
             DropForeignKey("dbo.Albums", "ArtistId", "dbo.Artists");
             DropForeignKey("dbo.Artists", "ApplicationId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Artists", "AddressId", "dbo.Addresses");
             DropIndex("dbo.Songs", new[] { "ArtistId" });
             DropIndex("dbo.Songs", new[] { "AlbumId" });
             DropIndex("dbo.SetLists", new[] { "ConcertId" });
             DropIndex("dbo.SetLists", new[] { "SongId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.MailingLists", new[] { "ArtistId" });
             DropIndex("dbo.MailingLists", new[] { "EmailId" });
             DropIndex("dbo.Conversations", new[] { "ContactId" });
@@ -209,17 +283,27 @@ namespace BandEngine.Migrations
             DropIndex("dbo.Concerts", new[] { "ArtistId" });
             DropIndex("dbo.Concerts", new[] { "AddressId" });
             DropIndex("dbo.ArtistTasks", new[] { "ArtistId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Artists", new[] { "ApplicationId" });
             DropIndex("dbo.Artists", new[] { "AddressId" });
             DropIndex("dbo.Albums", new[] { "ArtistId" });
             DropTable("dbo.Songs");
             DropTable("dbo.SetLists");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.MailingLists");
             DropTable("dbo.Conversations");
             DropTable("dbo.Emails");
             DropTable("dbo.Contacts");
             DropTable("dbo.Concerts");
             DropTable("dbo.ArtistTasks");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Artists");
             DropTable("dbo.Albums");
             DropTable("dbo.Addresses");

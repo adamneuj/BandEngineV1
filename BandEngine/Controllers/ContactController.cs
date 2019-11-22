@@ -17,9 +17,12 @@ namespace BandEngine.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Contact
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            int artistId = GetArtistId();
+            List<Contact> contacts = context.Contacts.Where(c => c.ArtistId == artistId).ToList();
+            return View(contacts);
         }
 
         // GET: Contact/Details/5
@@ -42,7 +45,7 @@ namespace BandEngine.Controllers
         {
             try
             {
-                string artistId = GetArtistApplicationId();
+                int artistId = GetArtistId();
                 Contact contact = contactInfo.Contact;
                 Address address = contactInfo.Address;
                 Email email = contactInfo.Email;
@@ -52,12 +55,14 @@ namespace BandEngine.Controllers
                 var addressFromDb = context.Addresses.FirstOrDefault(a => a.AddressLine1 == contactInfo.Address.AddressLine1 && a.AddressLine2 == contactInfo.Address.AddressLine2 && a.City == contactInfo.Address.City && a.State == contactInfo.Address.State && a.ZipCode == contactInfo.Address.ZipCode);
                 contact.EmailId = emailFromDb.EmailId;
                 contact.AddressId = addressFromDb.AddressId;
+                contact.ArtistId = artistId;
                 context.Contacts.Add(contact);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 return View();
             }
         }
@@ -124,6 +129,13 @@ namespace BandEngine.Controllers
         {
             context.Addresses.Add(address);
             context.SaveChanges();
+        }
+
+        private int GetArtistId()
+        {
+            string userId = GetArtistApplicationId();
+            var artist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+            return artist.ArtistId;
         }
     }
 }

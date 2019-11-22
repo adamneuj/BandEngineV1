@@ -19,7 +19,7 @@ namespace BandEngine.Models
         public virtual Address Address { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         [ForeignKey("Email")]
         public int EmailId { get; set; }
@@ -32,10 +32,10 @@ namespace BandEngine.Models
         public string Role { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime LastContact { get; set; }
+        public DateTime? LastContact { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime NextContact { get; set; }
+        public DateTime? NextContact { get; set; }
 
         [ForeignKey("Artist")]
         public int ArtistId { get; set; }
