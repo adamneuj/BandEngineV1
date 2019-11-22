@@ -1,0 +1,91 @@
+﻿@model BandEngine.Models.ConversationViewModel
+
+@{
+    ViewBag.Title = "Conversations";
+}
+
+<h2>Conversations</h2>
+
+<div>
+    <h4>Conversation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact.FirstName + " " + model.Contact.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Role")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact.Role)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Company")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact.Company)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Phone Number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Email")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email.EmailAddress)
+        </dd>
+
+    </dl>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Details")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AllConversations)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ContactId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ContactId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

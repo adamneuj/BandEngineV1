@@ -20,4 +20,13 @@ namespace BandEngine.Models
 
         public Email Email { get; set; }
     }
+
+    public class ConversationViewModel
+    {
+        public Contact Contact { get; set; }
+        public Conversation Conversation { get; set; }
+        public Email Email { get; set; }
+        public List<Conversation> AllConversations { get; set; }
+
+    }
 }

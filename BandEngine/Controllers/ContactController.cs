@@ -25,6 +25,31 @@ namespace BandEngine.Controllers
             return View(contacts);
         }
 
+        [Authorize]
+        public ActionResult Conversations(int id)
+        {
+            Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+            Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == contactFromDb.EmailId);
+            ConversationViewModel conversationInfo = new ConversationViewModel();
+            conversationInfo.AllConversations = context.Conversations.Where(c => c.ContactId == contactFromDb.ContactId).ToList();
+            conversationInfo.Contact = contactFromDb;
+            conversationInfo.Email = emailFromDb;
+            return View(conversationInfo);
+        }
+
+        [HttpPost]
+        public ActionResult Conversations(ConversationViewModel conversationInfo, int id)
+        {
+            try
+            {
+                return View(id);
+            }
+            catch
+            {
+                return View(id);
+            }
+        }
+
         // GET: Contact/Details/5
         public ActionResult Details(int id)
         {
