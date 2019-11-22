@@ -39,6 +39,28 @@ namespace BandEngine.Controllers
             return View(conversationInfo);
         }
 
+        [HttpPost]
+        public ActionResult CreateConversation(ConversationViewModel conversationInfo, int id)
+        {
+            try
+            {
+                Conversation conversation = conversationInfo.Conversation;
+                conversation.Date = DateTime.Today;
+                conversation.ContactId = id;
+                Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+                contactFromDb.LastContact = conversation.Date;
+                contactFromDb.NextContact = conversationInfo.Contact.NextContact;
+                context.Conversations.Add(conversation);
+                context.SaveChanges();
+                return RedirectToAction("Conversations", id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return View(id);
+            }
+        }
+
         // GET: Contact/Details/5
         public ActionResult Details(int id)
         {
