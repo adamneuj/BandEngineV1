@@ -115,12 +115,19 @@ namespace BandEngine.Controllers
         // GET: Contact/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Contact contact = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+            Address address = context.Addresses.FirstOrDefault(a => a.AddressId == contact.AddressId);
+            Email email = context.Emails.FirstOrDefault(e => e.EmailId == contact.EmailId);
+            ContactViewModel contactInfo = new ContactViewModel();
+            contactInfo.Contact = contact;
+            contactInfo.Address = address;
+            contactInfo.Email = email;
+            return View(contactInfo);
         }
 
         // POST: Contact/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ContactViewModel contactInfo)
         {
             try
             {
