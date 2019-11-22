@@ -5,14 +5,14 @@ using System.Web;
 
 namespace BandEngine.Models
 {
-    public class ArtistCreation
+    public class ArtistCreationViewModel
     {
         public Artist Artist { get; set; }
         public Address Address { get; set; }
 
     }
 
-    public class ContactCreation
+    public class ContactCreationViewModel
     {
         public Contact Contact { get; set; }
 

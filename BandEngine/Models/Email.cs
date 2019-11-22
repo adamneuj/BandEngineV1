@@ -11,6 +11,8 @@ namespace BandEngine.Models
     {
         [Key]
         public int EmailId { get; set; }
+
+        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
     }
 }

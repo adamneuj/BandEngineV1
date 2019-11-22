@@ -31,13 +31,13 @@ namespace BandEngine.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ArtistCreation artistInfo = new ArtistCreation();
+            ArtistCreationViewModel artistInfo = new ArtistCreationViewModel();
             return View(artistInfo);
         }
 
         // POST: Artist/Create
         [HttpPost]
-        public ActionResult Create(ArtistCreation artistInfo)
+        public ActionResult Create(ArtistCreationViewModel artistInfo)
         {
             try
             {

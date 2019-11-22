@@ -25,6 +25,9 @@ namespace BandEngine.Models
         public int EmailId { get; set; }
         public virtual Email Email { get; set; }
 
+        [DataType(DataType.Html)]
+        public string WebSite { get; set; }
+
         public string Company { get; set; }
         public string Role { get; set; }
 

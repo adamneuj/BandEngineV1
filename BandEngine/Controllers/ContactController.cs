@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BandEngine.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,12 +24,13 @@ namespace BandEngine.Controllers
         // GET: Contact/Create
         public ActionResult Create()
         {
-            return View();
+            ContactCreationViewModel contactInfo = new ContactCreationViewModel();
+            return View(contactInfo);
         }
 
         // POST: Contact/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ContactCreationViewModel contactInfo)
         {
             try
             {

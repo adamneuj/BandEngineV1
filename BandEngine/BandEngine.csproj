@@ -183,6 +183,14 @@
     <Compile Include="Migrations\201911220220050_AddModelsFromERD.Designer.cs">
       <DependentUpon>201911220220050_AddModelsFromERD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911221431410_UpdateEmailTable.cs" />
+    <Compile Include="Migrations\201911221431410_UpdateEmailTable.Designer.cs">
+      <DependentUpon>201911221431410_UpdateEmailTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911221447376_UpdateContactAddWebsite.cs" />
+    <Compile Include="Migrations\201911221447376_UpdateContactAddWebsite.Designer.cs">
+      <DependentUpon>201911221447376_UpdateContactAddWebsite.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -262,10 +270,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Artist\Create.cshtml" />
     <Content Include="Views\Artist\Index.cshtml" />
+    <Content Include="Views\Contact\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Contact\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -286,6 +294,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911220220050_AddModelsFromERD.resx">
       <DependentUpon>201911220220050_AddModelsFromERD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911221431410_UpdateEmailTable.resx">
+      <DependentUpon>201911221431410_UpdateEmailTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911221447376_UpdateContactAddWebsite.resx">
+      <DependentUpon>201911221447376_UpdateContactAddWebsite.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
