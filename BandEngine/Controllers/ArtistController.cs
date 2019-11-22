@@ -21,6 +21,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: Artist/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
