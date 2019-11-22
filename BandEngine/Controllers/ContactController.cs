@@ -1,4 +1,5 @@
 ﻿using BandEngine.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace BandEngine.Controllers
 {
     public class ContactController : Controller
     {
+        ApplicationDbContext context;
+
+        public ContactController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Contact
         public ActionResult Index()
         {
@@ -22,6 +29,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: Contact/Create
+        [Authorize]
         public ActionResult Create()
         {
             ContactCreationViewModel contactInfo = new ContactCreationViewModel();
@@ -34,8 +42,18 @@ namespace BandEngine.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                string artistId = GetArtistApplicationId();
+                Contact contact = contactInfo.Contact;
+                Address address = contactInfo.Address;
+                Email email = contactInfo.Email;
+                AddEmail(email);
+                AddAddress(address);
+                var emailFromDb = context.Emails.FirstOrDefault(e => e.EmailAddress == contactInfo.Email.EmailAddress);
+                var addressFromDb = context.Addresses.FirstOrDefault(a => a.AddressLine1 == contactInfo.Address.AddressLine1 && a.AddressLine2 == contactInfo.Address.AddressLine2 && a.City == contactInfo.Address.City && a.State == contactInfo.Address.State && a.ZipCode == contactInfo.Address.ZipCode);
+                contact.EmailId = emailFromDb.EmailId;
+                contact.AddressId = addressFromDb.AddressId;
+                context.Contacts.Add(contact);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -43,6 +61,7 @@ namespace BandEngine.Controllers
                 return View();
             }
         }
+
 
         // GET: Contact/Edit/5
         public ActionResult Edit(int id)
@@ -86,6 +105,25 @@ namespace BandEngine.Controllers
             {
                 return View();
             }
+        }
+
+        private string GetArtistApplicationId()
+        {
+            string userId = User.Identity.GetUserId();
+            var artist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+            return artist.ApplicationId;
+        }
+
+        private void AddEmail(Email email)
+        {
+            context.Emails.Add(email);
+            context.SaveChanges();
+        }
+
+        private void AddAddress(Address address)
+        {
+            context.Addresses.Add(address);
+            context.SaveChanges();
         }
     }
 }
