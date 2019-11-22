@@ -11,4 +11,13 @@ namespace BandEngine.Models
         public Address Address { get; set; }
 
     }
+
+    public class ContactCreation
+    {
+        public Contact Contact { get; set; }
+
+        public Address Address { get; set; }
+
+        public Email Email { get; set; }
+    }
 }
