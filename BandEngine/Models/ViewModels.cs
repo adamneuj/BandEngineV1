@@ -28,6 +28,12 @@ namespace BandEngine.Models
         public Email Email { get; set; }
         public List<Conversation> AllConversations { get; set; }
         public string ContactName { get; set; }
+    }
 
+    public class ContactViewModel
+    {
+        public Contact Contact { get; set; }
+        public Address Address { get; set; }
+        public Email Email { get; set; }
     }
 }
