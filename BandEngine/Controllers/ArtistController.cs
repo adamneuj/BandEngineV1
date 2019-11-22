@@ -1,4 +1,5 @@
 ﻿using BandEngine.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +41,16 @@ namespace BandEngine.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-
+                var userId = User.Identity.GetUserId();
+                Artist artist = artistInfo.Artist;
+                Address address = artistInfo.Address;
+                artist.ApplicationId = userId;
+                db.Addresses.Add(address);
+                db.SaveChanges();
+                var addressFromDb = db.Addresses.FirstOrDefault(a => a.AddressLine1 == artistInfo.Address.AddressLine1 && a.AddressLine2 == artistInfo.Address.AddressLine2 && a.City == artistInfo.Address.City && a.State == artistInfo.Address.State && a.ZipCode == artistInfo.Address.ZipCode);
+                artist.AddressId = addressFromDb.AddressId;
+                db.Artists.Add(artist);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
