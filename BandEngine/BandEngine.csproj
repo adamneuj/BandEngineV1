@@ -270,6 +270,7 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\Conversations.cshtml" />
     <Content Include="Views\Contact\CreateConversation.cshtml" />
+    <Content Include="Views\Contact\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

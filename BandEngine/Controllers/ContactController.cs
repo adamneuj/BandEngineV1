@@ -64,7 +64,15 @@ namespace BandEngine.Controllers
         // GET: Contact/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ContactViewModel contactInfo = new ContactViewModel();
+            Contact contactFromDb = context.Contacts.FirstOrDefault(c => c.ContactId == id);
+            Address contactAddress = context.Addresses.FirstOrDefault(a => a.AddressId == contactFromDb.AddressId);
+            Email contactEmail = context.Emails.FirstOrDefault(e => e.EmailId == contactFromDb.EmailId);
+            contactInfo.Contact = contactFromDb;
+            contactInfo.Email = contactEmail;
+            string fullAddress = ConcatAddress(contactAddress);
+            contactInfo.FullAddress = fullAddress;
+            return View(contactInfo);
         }
 
         // GET: Contact/Create
@@ -184,6 +192,21 @@ namespace BandEngine.Controllers
             conversationInfo.Email = emailFromDb;
             conversationInfo.ContactName = conversationInfo.Contact.FirstName + " " + conversationInfo.Contact.LastName;
             return conversationInfo;
+        }
+
+        private string ConcatAddress(Address address)
+        {
+            string zipCode = address.ZipCode.ToString();
+            if(address.AddressLine2 != null)
+            {
+                string fullAddress = address.AddressLine1 + " " + address.AddressLine2 + ", " + address.City + ", " + address.State + " " + zipCode;
+                return fullAddress;
+            }
+            else
+            {
+                string fullAddress = address.AddressLine1 + ", " + address.City + ", " + address.State + " " + zipCode;
+                return fullAddress;
+            } 
         }
     }
 }

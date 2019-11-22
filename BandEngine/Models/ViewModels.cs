@@ -35,5 +35,6 @@ namespace BandEngine.Models
         public Contact Contact { get; set; }
         public Address Address { get; set; }
         public Email Email { get; set; }
+        public string FullAddress { get; set; }
     }
 }
