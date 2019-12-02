@@ -280,6 +280,7 @@
     <Content Include="Views\MailingList\Delete.cshtml" />
     <Content Include="Views\ArtistTask\Index.cshtml" />
     <Content Include="Views\ArtistTask\Create.cshtml" />
+    <Content Include="Views\ArtistTask\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

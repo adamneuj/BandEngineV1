@@ -92,17 +92,19 @@ namespace BandEngine.Controllers
         // GET: ArtistTask/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ArtistTask artistTask = context.ArtistTasks.FirstOrDefault(a => a.TaskId == id);
+            return View(artistTask);
         }
 
         // POST: ArtistTask/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, ArtistTask artistTask)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                ArtistTask artistTaskFromDb = context.ArtistTasks.FirstOrDefault(a => a.TaskId == id);
+                context.ArtistTasks.Remove(artistTaskFromDb);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
