@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BandEngine.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,26 @@ namespace BandEngine.Controllers
 {
     public class MailingListController : Controller
     {
+        ApplicationDbContext context;
+
+        public MailingListController()
+        {
+            context = new ApplicationDbContext();
+        }
+
         // GET: MailingList
         public ActionResult Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+            List<MailingList> mailingListFromDb = context.MailingLists.Where(m => m.ArtistId == currentArtist.ArtistId).ToList();
+            List<Email> mailingList = new List<Email>();
+            foreach (MailingList emailFromDb in mailingListFromDb)
+            {
+                Email email = context.Emails.FirstOrDefault(e => e.EmailId == emailFromDb.EmailId);
+                mailingList.Add(email);
+            }
+            return View(mailingList);
         }
 
         // GET: MailingList/Details/5
