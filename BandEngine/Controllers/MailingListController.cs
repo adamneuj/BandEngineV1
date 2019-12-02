@@ -96,23 +96,33 @@ namespace BandEngine.Controllers
         }
 
         // GET: MailingList/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
-            return View();
+            Email email = context.Emails.FirstOrDefault(e => e.EmailId == id);
+            return View(email);
         }
 
         // POST: MailingList/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Email email)
         {
             try
             {
-                // TODO: Add delete logic here
+                var userId = User.Identity.GetUserId();
+                var currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+                Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == id);
+                MailingList mailingListFromDb = context.MailingLists.FirstOrDefault(m => m.EmailId == id && m.ArtistId == currentArtist.ArtistId);
+
+                context.MailingLists.Remove(mailingListFromDb);
+                context.Emails.Remove(emailFromDb);
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e);
                 return View();
             }
         }

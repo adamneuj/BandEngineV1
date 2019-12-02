@@ -276,6 +276,7 @@
     <Content Include="Views\Contact\Delete.cshtml" />
     <Content Include="Views\MailingList\Index.cshtml" />
     <Content Include="Views\MailingList\Create.cshtml" />
+    <Content Include="Views\MailingList\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
