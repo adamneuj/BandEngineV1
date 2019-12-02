@@ -40,8 +40,10 @@ namespace BandEngine.Controllers
         }
 
         // GET: MailingList/Create
+        [Authorize]
         public ActionResult Create()
         {
+
             return View();
         }
 

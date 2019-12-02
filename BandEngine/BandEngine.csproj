@@ -274,8 +274,8 @@
     <Content Include="Views\Contact\Details.cshtml" />
     <Content Include="Views\Contact\Edit.cshtml" />
     <Content Include="Views\Contact\Delete.cshtml" />
-    <Content Include="Views\MailingList\Index2.cshtml" />
     <Content Include="Views\MailingList\Index.cshtml" />
+    <Content Include="Views\MailingList\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
