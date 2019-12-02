@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<h2>Tasks Not Started</h2>
+<h2>Not Started Tasks</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -43,7 +43,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId }) |
+            @Html.ActionLink("Move to In Progress", "Move", new { id=item.TaskId})
         </td>
     </tr>
 }

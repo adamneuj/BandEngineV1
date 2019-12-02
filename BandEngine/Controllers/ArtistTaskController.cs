@@ -44,6 +44,25 @@ namespace BandEngine.Controllers
             return View(completedTasks);
         }
 
+        [Authorize]
+        public ActionResult Move(int id)
+        {
+            ArtistTask task = context.ArtistTasks.FirstOrDefault(a => a.TaskId == id);
+            if(task.Progress == "Not Started")
+            {
+                task.Progress = "In Progress";
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else if(task.Progress == "In Progress")
+            {
+                task.Progress = "Completed";
+                context.SaveChanges();
+                return RedirectToAction("InProgress");
+            }
+            return View();
+        }
+
         // GET: ArtistTask/Details/5
         public ActionResult Details(int id)
         {
