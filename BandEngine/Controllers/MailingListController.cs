@@ -18,6 +18,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: MailingList
+        [Authorize]
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
