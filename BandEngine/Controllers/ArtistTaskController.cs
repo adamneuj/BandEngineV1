@@ -106,17 +106,29 @@ namespace BandEngine.Controllers
         // GET: ArtistTask/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            ArtistTask artistTask = context.ArtistTasks.FirstOrDefault(a => a.TaskId == id);
+            ViewBag.Progress = new SelectList(progress);
+            return View(artistTask);
         }
 
         // POST: ArtistTask/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ArtistTask artistTask)
         {
             try
             {
-                // TODO: Add update logic here
+                var progress = new SelectList(new[]
+{
+                    new {value = 1, text = "Not Started"},
+                    new {value = 2, text = "In Progress"},
+                    new {value = 3, text = "Completed"}
+                });
+                ViewBag.Progress = progress;
 
+                var taskFromDb = context.ArtistTasks.FirstOrDefault(a => a.TaskId == id);
+                taskFromDb.Description = artistTask.Description;
+                taskFromDb.Progress = artistTask.Progress;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
