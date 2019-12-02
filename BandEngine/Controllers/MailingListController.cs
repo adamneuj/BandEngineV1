@@ -43,18 +43,28 @@ namespace BandEngine.Controllers
         [Authorize]
         public ActionResult Create()
         {
-
-            return View();
+            Email email = new Email();
+            return View(email);
         }
 
         // POST: MailingList/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Email email)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                context.Emails.Add(email);
+                context.SaveChanges();
+                var userId = User.Identity.GetUserId();
+                var currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+                var emailFromDb = context.Emails.FirstOrDefault(e => e.EmailAddress == email.EmailAddress);
+                MailingList mailingListEntry = new MailingList()
+                {
+                    EmailId = emailFromDb.EmailId,
+                    ArtistId = currentArtist.ArtistId
+                };
+                context.MailingLists.Add(mailingListEntry);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
