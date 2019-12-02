@@ -40,8 +40,8 @@ namespace BandEngine.Models
 
     public class ArtistTaskViewModel
     {
-        public List<ArtistTask> ToDo { get; set; }
-        public List<ArtistTask> Doing { get; set; }
+        public List<ArtistTask> ArtistTask { get; set; }
+        public List<ArtistTask> InProgress { get; set; }
         public List<ArtistTask> Done { get; set; }
 
     }
