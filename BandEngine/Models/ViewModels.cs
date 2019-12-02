@@ -37,4 +37,12 @@ namespace BandEngine.Models
         public Email Email { get; set; }
         public string FullAddress { get; set; }
     }
+
+    public class ArtistTaskViewModel
+    {
+        public List<ArtistTask> ToDo { get; set; }
+        public List<ArtistTask> Doing { get; set; }
+        public List<ArtistTask> Done { get; set; }
+
+    }
 }

@@ -113,11 +113,9 @@ namespace BandEngine.Controllers
                 var currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
                 Email emailFromDb = context.Emails.FirstOrDefault(e => e.EmailId == id);
                 MailingList mailingListFromDb = context.MailingLists.FirstOrDefault(m => m.EmailId == id && m.ArtistId == currentArtist.ArtistId);
-
                 context.MailingLists.Remove(mailingListFromDb);
                 context.Emails.Remove(emailFromDb);
                 context.SaveChanges();
-
                 return RedirectToAction("Index");
             }
             catch(Exception e)
