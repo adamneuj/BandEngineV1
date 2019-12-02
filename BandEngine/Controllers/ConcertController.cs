@@ -22,7 +22,16 @@ namespace BandEngine.Controllers
         {
             Artist artist = GetCurrentArtist();
             List<Concert> concerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId).ToList();
-            return View(concerts);
+            List<ConcertViewModel> allConcerts = new List<ConcertViewModel>();
+            foreach(Concert concert in concerts)
+            {
+                ConcertViewModel concertInfo = new ConcertViewModel();
+                concertInfo.Concert = concert;
+                concertInfo.Address = context.Addresses.FirstOrDefault(a => a.AddressId == concert.AddressId);
+                concertInfo.FullAddress = ConcatAddress(concertInfo.Address);
+                allConcerts.Add(concertInfo);
+            }
+            return View(allConcerts);
         }
 
         // GET: Concert/Details/5
@@ -102,6 +111,21 @@ namespace BandEngine.Controllers
             var userId = User.Identity.GetUserId();
             Artist currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
             return currentArtist;
+        }
+
+        private string ConcatAddress(Address address)
+        {
+            string zipCode = address.ZipCode.ToString();
+            if (address.AddressLine2 != null)
+            {
+                string fullAddress = address.AddressLine1 + " " + address.AddressLine2 + ", " + address.City + ", " + address.State + " " + zipCode;
+                return fullAddress;
+            }
+            else
+            {
+                string fullAddress = address.AddressLine1 + ", " + address.City + ", " + address.State + " " + zipCode;
+                return fullAddress;
+            }
         }
     }
 }

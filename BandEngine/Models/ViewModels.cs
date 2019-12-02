@@ -37,4 +37,11 @@ namespace BandEngine.Models
         public Email Email { get; set; }
         public string FullAddress { get; set; }
     }
+
+    public class ConcertViewModel
+    {
+        public Concert Concert { get; set; }
+        public Address Address { get; set; }
+        public string FullAddress { get; set; }
+    }
 }
