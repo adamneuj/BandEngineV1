@@ -281,6 +281,7 @@
     <Content Include="Views\ArtistTask\Index.cshtml" />
     <Content Include="Views\ArtistTask\Create.cshtml" />
     <Content Include="Views\ArtistTask\Delete.cshtml" />
+    <Content Include="Views\ArtistTask\InProgress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

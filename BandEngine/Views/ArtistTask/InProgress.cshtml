@@ -1,34 +1,27 @@
 ﻿@model IEnumerable<BandEngine.Models.ArtistTask>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "InProgress";
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <h5>
-            <p>
-                @Html.ActionLink("Not Started", "Index") |
-                @Html.ActionLink("In Progress", "InProgress") |
-                @Html.ActionLink("Completed", "Completed")
-            </p>
-        </h5>
-    </div>
-</div>
-
-<h2>Tasks Not Started</h2>
+<h2>InProgress</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Progress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistId)
         </th>
         <th></th>
     </tr>
@@ -39,10 +32,17 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Progress)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.ArtistId)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TaskId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
         </td>
     </tr>

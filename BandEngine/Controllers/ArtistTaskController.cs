@@ -35,6 +35,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: ArtistTask/Create
+        [Authorize]
         public ActionResult Create()
         {
             ArtistTask artistTask = new ArtistTask();
