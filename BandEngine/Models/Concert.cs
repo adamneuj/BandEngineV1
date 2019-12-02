@@ -12,6 +12,8 @@ namespace BandEngine.Models
         [Key]
         public int ConcertId { get; set; }
 
+        public string VenueName { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ConcertDate { get; set; }
 

@@ -190,6 +190,10 @@
     <Compile Include="Migrations\201911221608221_NullDateTimesInContactModel.Designer.cs">
       <DependentUpon>201911221608221_NullDateTimesInContactModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912022100479_AddVenueNameToConcert.cs" />
+    <Compile Include="Migrations\201912022100479_AddVenueNameToConcert.Designer.cs">
+      <DependentUpon>201912022100479_AddVenueNameToConcert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -285,10 +289,10 @@
     <Content Include="Views\ArtistTask\InProgress.cshtml" />
     <Content Include="Views\ArtistTask\Completed.cshtml" />
     <Content Include="Views\ArtistTask\Edit.cshtml" />
+    <Content Include="Views\Concert\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Concert\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -312,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911221608221_NullDateTimesInContactModel.resx">
       <DependentUpon>201911221608221_NullDateTimesInContactModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912022100479_AddVenueNameToConcert.resx">
+      <DependentUpon>201912022100479_AddVenueNameToConcert.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

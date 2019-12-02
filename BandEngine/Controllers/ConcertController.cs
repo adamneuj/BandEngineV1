@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BandEngine.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,19 @@ namespace BandEngine.Controllers
 {
     public class ConcertController : Controller
     {
+        ApplicationDbContext context;
+
+        public ConcertController()
+        {
+            context = new ApplicationDbContext();
+        }
+
         // GET: Concert
         public ActionResult Index()
         {
-            return View();
+            Artist artist = GetCurrentArtist();
+            List<Concert> concerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId).ToList();
+            return View(concerts);
         }
 
         // GET: Concert/Details/5
@@ -84,6 +95,13 @@ namespace BandEngine.Controllers
             {
                 return View();
             }
+        }
+
+        private Artist GetCurrentArtist()
+        {
+            var userId = User.Identity.GetUserId();
+            Artist currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+            return currentArtist;
         }
     }
 }
