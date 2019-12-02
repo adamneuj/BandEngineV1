@@ -28,6 +28,22 @@ namespace BandEngine.Controllers
             return View(currentTasks);
         }
 
+        [Authorize]
+        public ActionResult InProgress()
+        {
+            Artist artist = GetCurrentArtist();
+            List<ArtistTask> inProgressTasks = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "In Progress").ToList();
+            return View(inProgressTasks);
+        }
+
+        [Authorize]
+        public ActionResult Completed()
+        {
+            Artist artist = GetCurrentArtist();
+            List<ArtistTask> completedTasks = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "Completed").ToList();
+            return View(completedTasks);
+        }
+
         // GET: ArtistTask/Details/5
         public ActionResult Details(int id)
         {
