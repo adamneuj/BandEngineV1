@@ -44,4 +44,8 @@ namespace BandEngine.Models
         public Address Address { get; set; }
         public string FullAddress { get; set; }
     }
+    public class AllConcertsViewModel
+    {
+        public List<ConcertViewModel> AllConcerts { get; set; }
+    }
 }
