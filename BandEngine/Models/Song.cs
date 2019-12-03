@@ -16,7 +16,7 @@ namespace BandEngine.Models
         public string Progress { get; set; }
 
         [ForeignKey("Album")]
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
         public virtual Album Album { get; set; }
 
         [ForeignKey("Artist")]
