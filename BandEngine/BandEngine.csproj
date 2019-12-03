@@ -301,6 +301,7 @@
     <Content Include="Views\Song\Index.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Concert\SetList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

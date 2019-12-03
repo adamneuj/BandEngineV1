@@ -44,4 +44,10 @@ namespace BandEngine.Models
         public Address Address { get; set; }
         public string FullAddress { get; set; }
     }
+    public class SetListViewModel
+    {
+        public List<SetList> SetList { get; set; }
+        public List<Song> AllSongs { get; set; }
+        public Concert CurrentConcert { get; set; }
+    }
 }

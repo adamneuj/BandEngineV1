@@ -80,6 +80,38 @@ namespace BandEngine.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult SetList(int id)
+        {
+            Artist artist = GetCurrentArtist();
+            Concert currentConcert = context.Concerts.FirstOrDefault(c => c.ConcertId == id);
+            SetListViewModel setListInfo = new SetListViewModel()
+            {
+                AllSongs = context.Songs.Where(s => s.ArtistId == artist.ArtistId).ToList(),
+                SetList = context.SetLists.Where(s => s.ConcertId == id).OrderBy(s => s.Position).ToList(),
+                CurrentConcert = currentConcert
+            };
+            return View(setListInfo);
+        }
+
+        [Authorize]
+        public ActionResult AddToSetList(int id, int concertId)
+        {
+            Artist artist = GetCurrentArtist();
+            Song song = context.Songs.FirstOrDefault(s => s.SongId == id);
+            SetList setList = new SetList() 
+            {
+                SongId = song.SongId,
+                ConcertId = concertId,
+            };
+            List<SetList> allSetListSongs = context.SetLists.Where(s => s.ConcertId == concertId).ToList();
+            allSetListSongs.Add(setList);
+            setList.Position = allSetListSongs.Count();
+            context.SetLists.Add(setList);
+            context.SaveChanges();
+            return RedirectToAction("SetList", new { id = concertId });
+        }
+
         // GET: Concert/Edit/5
         public ActionResult Edit(int id)
         {

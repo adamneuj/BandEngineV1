@@ -1,0 +1,61 @@
+﻿@model BandEngine.Models.SetListViewModel
+
+@{
+    ViewBag.Title = "SetList";
+}
+
+<h2>Set List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Set List Position")
+        </th>
+        <th>
+            @Html.DisplayName("Song")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.SetList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Song.SongName)
+            </td>
+            <td>
+                @Html.ActionLink("Move Up", "AddToSetList", new { id = item.SongId }) |
+                @Html.ActionLink("Move Down", "AddToSetList", new { id = item.SongId }) |
+                @Html.ActionLink("Remove", "AddToSetList", new { id = item.SongId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h2>All Songs</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Song Name")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AllSongs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongName)
+            </td>
+            <td>
+                @Html.ActionLink("Add To Set List", "AddToSetList", new { id = item.SongId, concertId = Model.CurrentConcert.ConcertId })
+            </td>
+        </tr>
+    }
+
+</table>
