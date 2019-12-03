@@ -45,17 +45,32 @@ namespace BandEngine.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ConcertViewModel concert = new ConcertViewModel();
-            return View(concert);
+            ConcertViewModel concertInfo = new ConcertViewModel();
+            return View(concertInfo);
         }
 
         // POST: Concert/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ConcertViewModel concertInfo)
         {
             try
             {
-
+                Artist artist = GetCurrentArtist();
+                Concert concert = new Concert()
+                {
+                    ArtistId = artist.ArtistId,
+                    ConcertDate = concertInfo.Concert.ConcertDate,
+                    VenueName = concertInfo.Concert.VenueName,
+                    VenueCapacity = concertInfo.Concert.VenueCapacity
+                };
+                Address addressToDb = concertInfo.Address;
+                context.Addresses.Add(addressToDb);
+                context.SaveChanges();
+                
+                Address addressFromDb = context.Addresses.FirstOrDefault(a => a.AddressLine1 == concertInfo.Address.AddressLine1 && a.AddressLine2 == concertInfo.Address.AddressLine2 && a.City == concertInfo.Address.City && a.State == concertInfo.Address.State && a.ZipCode == concertInfo.Address.ZipCode);
+                concert.AddressId = addressFromDb.AddressId;
+                context.Concerts.Add(concert);
+                context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
