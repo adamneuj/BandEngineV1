@@ -18,6 +18,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: Concert
+        [Authorize]
         public ActionResult Index()
         {
             Artist artist = GetCurrentArtist();
@@ -41,9 +42,11 @@ namespace BandEngine.Controllers
         }
 
         // GET: Concert/Create
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            ConcertViewModel concert = new ConcertViewModel();
+            return View(concert);
         }
 
         // POST: Concert/Create
@@ -52,7 +55,7 @@ namespace BandEngine.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+
 
                 return RedirectToAction("Index");
             }
