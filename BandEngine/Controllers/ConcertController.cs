@@ -98,10 +98,9 @@ namespace BandEngine.Controllers
         public ActionResult AddToSetList(int id, int concertId)
         {
             Artist artist = GetCurrentArtist();
-            Song song = context.Songs.FirstOrDefault(s => s.SongId == id);
             SetList setList = new SetList() 
             {
-                SongId = song.SongId,
+                SongId = id,
                 ConcertId = concertId,
             };
             List<SetList> allSetListSongs = context.SetLists.Where(s => s.ConcertId == concertId).ToList();
@@ -109,6 +108,21 @@ namespace BandEngine.Controllers
             setList.Position = allSetListSongs.Count();
             context.SetLists.Add(setList);
             context.SaveChanges();
+            return RedirectToAction("SetList", new { id = concertId });
+        }
+
+        [Authorize]
+        public ActionResult Remove(int id, int concertId)
+        {
+            SetList song = context.SetLists.FirstOrDefault(s => s.SongId == id);
+            context.SetLists.Remove(song);
+            context.SaveChanges();
+            List<SetList> setList = context.SetLists.Where(s => s.ConcertId == concertId).OrderBy(s => s.Position).ToList();
+            for(int i = 0; i < setList.Count; i++)
+            {
+                setList[i].Position = i + 1;
+                context.SaveChanges();
+            }
             return RedirectToAction("SetList", new { id = concertId });
         }
 

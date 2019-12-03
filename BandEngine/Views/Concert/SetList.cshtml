@@ -29,7 +29,7 @@
             <td>
                 @Html.ActionLink("Move Up", "AddToSetList", new { id = item.SongId }) |
                 @Html.ActionLink("Move Down", "AddToSetList", new { id = item.SongId }) |
-                @Html.ActionLink("Remove", "AddToSetList", new { id = item.SongId })
+                @Html.ActionLink("Remove", "Remove", new { id = item.SongId, concertId = Model.CurrentConcert.ConcertId })
             </td>
         </tr>
     }
