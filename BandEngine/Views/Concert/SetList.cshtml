@@ -27,8 +27,8 @@
                 @Html.DisplayFor(modelItem => item.Song.SongName)
             </td>
             <td>
-                @Html.ActionLink("Move Up", "AddToSetList", new { id = item.SongId }) |
-                @Html.ActionLink("Move Down", "AddToSetList", new { id = item.SongId }) |
+                @Html.ActionLink("Move Up", "MoveUp", new { id = item.SongId, concertId = Model.CurrentConcert.ConcertId }) |
+                @Html.ActionLink("Move Down", "MoveDown", new { id = item.SongId, concertId = Model.CurrentConcert.ConcertId }) |
                 @Html.ActionLink("Remove", "Remove", new { id = item.SongId, concertId = Model.CurrentConcert.ConcertId })
             </td>
         </tr>

@@ -126,6 +126,28 @@ namespace BandEngine.Controllers
             return RedirectToAction("SetList", new { id = concertId });
         }
 
+        [Authorize]
+        public ActionResult MoveDown(int id, int concertId)
+        {
+            SetList song = context.SetLists.FirstOrDefault(s => s.SongId == id);
+            SetList nextSong = context.SetLists.FirstOrDefault(s => s.Position == song.Position + 1);
+            song.Position = nextSong.Position;
+            nextSong.Position = song.Position - 1;
+            context.SaveChanges();
+            return RedirectToAction("SetList", new { id = concertId });
+        }
+
+        [Authorize]
+        public ActionResult MoveUp(int id, int concertId)
+        {
+            SetList song = context.SetLists.FirstOrDefault(s => s.SongId == id);
+            SetList previousSong = context.SetLists.FirstOrDefault(s => s.Position == song.Position - 1);
+            song.Position = previousSong.Position;
+            previousSong.Position = song.Position + 1;
+            context.SaveChanges();
+            return RedirectToAction("SetList", new { id = concertId });
+        }
+
         // GET: Concert/Edit/5
         public ActionResult Edit(int id)
         {
