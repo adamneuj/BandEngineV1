@@ -16,9 +16,12 @@ namespace BandEngine.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Song
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            Artist artist = GetCurrentArtist();
+            List<Song> songs = context.Songs.Where(s => s.ArtistId == artist.ArtistId).ToList();
+            return View(songs);
         }
 
         // GET: Song/Details/5

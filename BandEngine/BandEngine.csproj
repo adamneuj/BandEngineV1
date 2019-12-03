@@ -297,6 +297,7 @@
     <Content Include="Views\Concert\Index.cshtml" />
     <Content Include="Views\Concert\Create.cshtml" />
     <Content Include="Views\Song\Create.cshtml" />
+    <Content Include="Views\Song\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
