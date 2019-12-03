@@ -299,10 +299,10 @@
     <Content Include="Views\Concert\Create.cshtml" />
     <Content Include="Views\Song\Create.cshtml" />
     <Content Include="Views\Song\Index.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Album\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BandEngine.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,18 @@ namespace BandEngine.Controllers
 {
     public class AlbumController : Controller
     {
+        ApplicationDbContext context;
+
+        public AlbumController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Album
         public ActionResult Index()
         {
-            return View();
+            Artist artist = GetCurrentArtist();
+            List<Album> albums = context.Albums.Where(a => a.ArtistId == artist.ArtistId).ToList();
+            return View(albums);
         }
 
         // GET: Album/Details/5
@@ -23,17 +33,20 @@ namespace BandEngine.Controllers
         // GET: Album/Create
         public ActionResult Create()
         {
-            return View();
+            Album album = new Album();
+            return View(album);
         }
 
         // POST: Album/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Album album)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                Artist artist = GetCurrentArtist();
+                album.ArtistId = artist.ArtistId;
+                context.Albums.Add(album);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -84,6 +97,12 @@ namespace BandEngine.Controllers
             {
                 return View();
             }
+        }
+        private Artist GetCurrentArtist()
+        {
+            var userId = User.Identity.GetUserId();
+            Artist currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
+            return currentArtist;
         }
     }
 }
