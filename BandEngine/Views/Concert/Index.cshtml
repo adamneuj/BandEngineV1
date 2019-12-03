@@ -36,9 +36,8 @@
             @Html.DisplayFor(modelItem => item.FullAddress)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Concert.ConcertId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Concert.ConcertId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Concert.ConcertId })
+            @Html.ActionLink("Set List", "SetList", new { id=item.Concert.ConcertId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Concert.ConcertId })
         </td>
     </tr>
 }
