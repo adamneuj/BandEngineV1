@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201912042128518_AddTours.Designer.cs">
       <DependentUpon>201912042128518_AddTours.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912042134583_AddingTourName.cs" />
+    <Compile Include="Migrations\201912042134583_AddingTourName.Designer.cs">
+      <DependentUpon>201912042134583_AddingTourName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912042128518_AddTours.resx">
       <DependentUpon>201912042128518_AddTours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912042134583_AddingTourName.resx">
+      <DependentUpon>201912042134583_AddingTourName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

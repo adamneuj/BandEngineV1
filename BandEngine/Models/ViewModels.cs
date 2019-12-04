@@ -56,4 +56,9 @@ namespace BandEngine.Models
         public List<Song> SongsOnAlbum { get; set; }
         public Album CurrentAlbum { get; set; }
     }
+
+    public class TourViewModel
+    {
+        public List<Tour> AllTours { get; set; }
+    }
 }
