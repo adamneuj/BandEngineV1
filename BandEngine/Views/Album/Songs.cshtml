@@ -27,7 +27,7 @@
                 @Html.DisplayFor(modelItem => item.Progress)
             </td>
             <td>
-                @Html.ActionLink("Remove from Album", "RemoveFromAlbum", new { id = item.AlbumId })
+                @Html.ActionLink("Remove from Album", "RemoveFromAlbum", new { albumId = item.AlbumId, songId = item.SongId })
             </td>
         </tr>
     }
@@ -57,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Progress)
             </td>
             <td>
-                @Html.ActionLink("Add to Album", "AddToAlbum", new { id = item.AlbumId })
+                @Html.ActionLink("Add to Album", "AddToAlbum", new { albumId = Model.CurrentAlbum.AlbumId, songId = item.SongId })
             </td>
         </tr>
     }

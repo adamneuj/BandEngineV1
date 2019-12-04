@@ -71,6 +71,24 @@ namespace BandEngine.Controllers
             return View(albumInfo);
         }
 
+        [Authorize]
+        public ActionResult AddToAlbum(int albumId, int songId)
+        {
+            Song song = context.Songs.FirstOrDefault(s => s.SongId == songId);
+            song.AlbumId = albumId;
+            context.SaveChanges();
+            return RedirectToAction("Songs", new { id = albumId });
+        }
+
+        [Authorize]
+        public ActionResult RemoveFromAlbum(int albumId, int songId)
+        {
+            Song song = context.Songs.FirstOrDefault(s => s.SongId == songId);
+            song.AlbumId = null;
+            context.SaveChanges();
+            return RedirectToAction("Songs", new { id = albumId });
+        }
+
         // GET: Album/Edit/5
         public ActionResult Edit(int id)
         {
