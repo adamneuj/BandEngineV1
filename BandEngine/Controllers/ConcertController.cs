@@ -22,7 +22,7 @@ namespace BandEngine.Controllers
         public ActionResult Index()
         {
             Artist artist = GetCurrentArtist();
-            List<Concert> concerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId).ToList();
+            List<Concert> concerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.ConcertDate >= DateTime.Today).ToList();
             List<ConcertViewModel> allConcerts = new List<ConcertViewModel>();
             foreach(Concert concert in concerts)
             {
@@ -33,6 +33,23 @@ namespace BandEngine.Controllers
                 allConcerts.Add(concertInfo);
             }
             return View(allConcerts);
+        }
+
+        [Authorize]
+        public ActionResult PastConcerts()
+        {
+            Artist artist = GetCurrentArtist();
+            List<Concert> concerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.ConcertDate < DateTime.Today).ToList();
+            List<ConcertViewModel> pastConcerts = new List<ConcertViewModel>();
+            foreach (Concert concert in concerts)
+            {
+                ConcertViewModel concertInfo = new ConcertViewModel();
+                concertInfo.Concert = concert;
+                concertInfo.Address = context.Addresses.FirstOrDefault(a => a.AddressId == concert.AddressId);
+                concertInfo.FullAddress = ConcatAddress(concertInfo.Address);
+                pastConcerts.Add(concertInfo);
+            }
+            return View(pastConcerts);
         }
 
         // GET: Concert/Details/5

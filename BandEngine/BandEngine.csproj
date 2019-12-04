@@ -200,6 +200,14 @@
     <Compile Include="Migrations\201912031539202_NullableAlbumIdInSongs.Designer.cs">
       <DependentUpon>201912031539202_NullableAlbumIdInSongs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912041619500_AddAttendanceToConcertModel.cs" />
+    <Compile Include="Migrations\201912041619500_AddAttendanceToConcertModel.Designer.cs">
+      <DependentUpon>201912041619500_AddAttendanceToConcertModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912041620343_MadeVenueCapacityAndAttendanceNullableType.cs" />
+    <Compile Include="Migrations\201912041620343_MadeVenueCapacityAndAttendanceNullableType.Designer.cs">
+      <DependentUpon>201912041620343_MadeVenueCapacityAndAttendanceNullableType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -302,6 +310,7 @@
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\Create.cshtml" />
     <Content Include="Views\Concert\SetList.cshtml" />
+    <Content Include="Views\Concert\PastConcerts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -334,6 +343,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912031539202_NullableAlbumIdInSongs.resx">
       <DependentUpon>201912031539202_NullableAlbumIdInSongs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912041619500_AddAttendanceToConcertModel.resx">
+      <DependentUpon>201912041619500_AddAttendanceToConcertModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912041620343_MadeVenueCapacityAndAttendanceNullableType.resx">
+      <DependentUpon>201912041620343_MadeVenueCapacityAndAttendanceNullableType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

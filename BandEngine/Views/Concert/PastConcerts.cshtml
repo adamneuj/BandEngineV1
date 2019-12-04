@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BandEngine.Models.ConcertViewModel>
+
+@{
+    ViewBag.Title = "Past Concerts";
+}
+
+<p>
+    <h4>
+        @Html.ActionLink("Upcoming Concerts", "Index")
+    </h4>
+</p>
+
+<h2>Past Concerts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Venue Name")
+        </th>
+        <th>
+            @Html.DisplayName("Venue Address")
+        </th>
+        <th>
+            @Html.DisplayName("Attendance")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concert.ConcertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concert.VenueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concert.Attendance)
+            </td>
+            <td>
+                @Html.ActionLink("Update Attendance", "Attendance", new { id = item.Concert.ConcertId })
+            </td>
+        </tr>
+    }
+
+</table>
