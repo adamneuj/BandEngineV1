@@ -29,5 +29,9 @@ namespace BandEngine.Models
         public int ArtistId { get; set; }
         public virtual Artist Artist { get; set; }
 
+        [ForeignKey("Tour")]
+        public int? TourId { get; set; }
+        public virtual Tour Tour { get; set; }
+
     }
 }

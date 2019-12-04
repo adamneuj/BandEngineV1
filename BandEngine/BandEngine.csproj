@@ -177,6 +177,7 @@
     <Compile Include="Controllers\MailingListController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SongController.cs" />
+    <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +216,10 @@
     <Compile Include="Migrations\201912042134583_AddingTourName.cs" />
     <Compile Include="Migrations\201912042134583_AddingTourName.Designer.cs">
       <DependentUpon>201912042134583_AddingTourName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912042151376_AddingForeignKeyOfTourIdToConcerts.cs" />
+    <Compile Include="Migrations\201912042151376_AddingForeignKeyOfTourIdToConcerts.Designer.cs">
+      <DependentUpon>201912042151376_AddingForeignKeyOfTourIdToConcerts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -326,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Tour\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -367,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912042134583_AddingTourName.resx">
       <DependentUpon>201912042134583_AddingTourName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912042151376_AddingForeignKeyOfTourIdToConcerts.resx">
+      <DependentUpon>201912042151376_AddingForeignKeyOfTourIdToConcerts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,10 +14,6 @@ namespace BandEngine.Models
 
         public string TourName { get; set; }
 
-        [ForeignKey("Concert")]
-        public int ConcertId { get; set; }
-        public Concert Concert { get; set; }
-
         [ForeignKey("Artist")]
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
