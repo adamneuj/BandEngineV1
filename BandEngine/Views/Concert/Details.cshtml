@@ -1,0 +1,49 @@
+﻿@model BandEngine.Models.ConcertViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ConcertViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Date")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concert.ConcertDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Venue Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concert.VenueName)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Address")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Capacity")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concert.VenueCapacity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

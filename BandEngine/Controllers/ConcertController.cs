@@ -55,7 +55,15 @@ namespace BandEngine.Controllers
         // GET: Concert/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Concert concert = context.Concerts.FirstOrDefault(c => c.ConcertId == id);
+            Address address = context.Addresses.FirstOrDefault(a => a.AddressId == concert.AddressId);
+            ConcertViewModel concertInfo = new ConcertViewModel()
+            {
+                Concert = concert,
+                Address = address,
+                FullAddress = ConcatAddress(address)
+            };
+            return View(concertInfo);
         }
 
         // GET: Concert/Create
