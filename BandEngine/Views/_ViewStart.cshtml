@@ -1,3 +1,13 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    var user = User.Identity.GetUserId();
+    if(user != null)
+    {
+        Layout = "~/Views/Shared/_ArtistLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 }

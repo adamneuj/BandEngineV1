@@ -313,6 +313,7 @@
     <Content Include="Views\Concert\PastConcerts.cshtml" />
     <Content Include="Views\Concert\Details.cshtml" />
     <Content Include="Views\Album\Songs.cshtml" />
+    <Content Include="Views\Shared\_ArtistLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
