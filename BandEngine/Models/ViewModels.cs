@@ -50,4 +50,10 @@ namespace BandEngine.Models
         public List<Song> AllSongs { get; set; }
         public Concert CurrentConcert { get; set; }
     }
+    public class AlbumSongsViewModel
+    {
+        public List<Song> AllSongs { get; set; }
+        public List<Song> SongsOnAlbum { get; set; }
+        public Album CurrentAlbum { get; set; }
+    }
 }

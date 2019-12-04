@@ -1,0 +1,66 @@
+﻿@model BandEngine.Models.AlbumSongsViewModel
+
+@{
+    ViewBag.Title = "Songs";
+}
+
+<h2>Songs on Album</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Song Name")
+        </th>
+        <th>
+            @Html.DisplayName("Progress")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.SongsOnAlbum)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progress)
+            </td>
+            <td>
+                @Html.ActionLink("Remove from Album", "RemoveFromAlbum", new { id = item.AlbumId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h2>Songs</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Song Name")
+        </th>
+        <th>
+            @Html.DisplayName("Progress")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AllSongs)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SongName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progress)
+            </td>
+            <td>
+                @Html.ActionLink("Add to Album", "AddToAlbum", new { id = item.AlbumId })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -29,8 +29,8 @@
             @Html.DisplayFor(modelItem => item.Progress)
         </td>
         <td>
-            @Html.ActionLink("Add Songs", "Edit", new { id=item.AlbumId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AlbumId }) |
+            @Html.ActionLink("Songs", "Songs", new { id=item.AlbumId }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.AlbumId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.AlbumId })
         </td>
     </tr>

@@ -17,6 +17,7 @@ namespace BandEngine.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Album
+        [Authorize]
         public ActionResult Index()
         {
             Artist artist = GetCurrentArtist();
@@ -31,6 +32,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: Album/Create
+        [Authorize]
         public ActionResult Create()
         {
             Album album = new Album();
@@ -53,6 +55,20 @@ namespace BandEngine.Controllers
             {
                 return View();
             }
+        }
+
+        [Authorize]
+        public ActionResult Songs(int id)
+        {
+            Artist artist = GetCurrentArtist();
+            Album album = context.Albums.FirstOrDefault(a => a.AlbumId == id);
+            AlbumSongsViewModel albumInfo = new AlbumSongsViewModel()
+            {
+                CurrentAlbum = album,
+                AllSongs = context.Songs.Where(s => s.ArtistId == artist.ArtistId && s.AlbumId != id).ToList(),
+                SongsOnAlbum = context.Songs.Where(s => s.ArtistId == artist.ArtistId && s.AlbumId == id).ToList()
+            };
+            return View(albumInfo);
         }
 
         // GET: Album/Edit/5
