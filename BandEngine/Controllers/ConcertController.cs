@@ -1,8 +1,10 @@
 ﻿using BandEngine.Models;
+using BandEngine.ServiceClasses;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -76,7 +78,7 @@ namespace BandEngine.Controllers
 
         // POST: Concert/Create
         [HttpPost]
-        public ActionResult Create(ConcertViewModel concertInfo)
+        public async Task<ActionResult> Create(ConcertViewModel concertInfo)
         {
             try
             {
@@ -89,9 +91,11 @@ namespace BandEngine.Controllers
                     VenueCapacity = concertInfo.Concert.VenueCapacity
                 };
                 Address addressToDb = concertInfo.Address;
+                string[] latLng = await GeoCode.GetLatLongFromApi(addressToDb);
+                addressToDb.Lat = latLng[0];
+                addressToDb.Lng = latLng[1];
                 context.Addresses.Add(addressToDb);
                 context.SaveChanges();
-                
                 Address addressFromDb = context.Addresses.FirstOrDefault(a => a.AddressLine1 == concertInfo.Address.AddressLine1 && a.AddressLine2 == concertInfo.Address.AddressLine2 && a.City == concertInfo.Address.City && a.State == concertInfo.Address.State && a.ZipCode == concertInfo.Address.ZipCode);
                 concert.AddressId = addressFromDb.AddressId;
                 context.Concerts.Add(concert);

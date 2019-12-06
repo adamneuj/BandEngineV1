@@ -15,7 +15,7 @@ namespace BandEngine.Models
         public string City { get; set; }
         public StateList State { get; set; }
         public int ZipCode { get; set; }
-        public decimal? Lat { get; set; }
-        public decimal? Lng { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
     }
 }
