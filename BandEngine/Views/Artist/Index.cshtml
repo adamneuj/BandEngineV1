@@ -10,3 +10,25 @@
 
 <h3>Recommended Tasks</h3>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Task")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.RecommendedTasks)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Move to Tasks", "Move", new { description = item.Description })
+            </td>
+        </tr>
+    }
+
+</table>
+

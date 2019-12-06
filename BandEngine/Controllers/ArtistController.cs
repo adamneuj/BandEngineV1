@@ -16,12 +16,13 @@ namespace BandEngine.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Artist
+        [Authorize]
         public ActionResult Index()
         {
             Artist artist = GetCurrentArtist();
             List<ArtistTask> mailingTasks = GetMailingListArtistTask(artist);
             List<ArtistTask> concertTasks = GetConcertArtistTasks(artist);
-            List<ArtistTask> allTasks = new List<ArtistTask>;
+            List<ArtistTask> allTasks = new List<ArtistTask>();
             allTasks.AddRange(mailingTasks);
             allTasks.AddRange(concertTasks);
             ArtistIndexViewModel artistInfo = new ArtistIndexViewModel()
@@ -32,9 +33,18 @@ namespace BandEngine.Controllers
         }
 
         // GET: Artist/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Move(string description)
         {
-            return View();
+            Artist artist = GetCurrentArtist();
+            ArtistTask task = new ArtistTask()
+            {
+                ArtistId = artist.ArtistId,
+                Description = description,
+                Progress = "Not Started"
+            };
+            context.ArtistTasks.Add(task);
+            context.SaveChanges();
+            return RedirectToAction("Index", "ArtistTask");
         }
 
         // GET: Artist/Create
