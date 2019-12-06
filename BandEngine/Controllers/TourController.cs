@@ -25,6 +25,19 @@ namespace BandEngine.Controllers
             return View(allTours);
         }
 
+        [Authorize]
+        public ActionResult Stops(int id)
+        {
+            Artist artist = GetCurrentArtist();
+            TourViewModel tourInfo = new TourViewModel()
+            {
+                AllConcerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.ConcertDate > DateTime.Today).ToList(),
+                AllStops = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.TourId == id).ToList(),
+                CurrentTour = context.Tours.FirstOrDefault(t => t.TourId == id)
+            };
+            return View(tourInfo);
+        }
+
         // GET: Tour/Details/5
         public ActionResult Details(int id)
         {

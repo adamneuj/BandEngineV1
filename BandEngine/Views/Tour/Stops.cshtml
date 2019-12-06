@@ -1,0 +1,67 @@
+﻿@model BandEngine.Models.TourViewModel
+
+@{
+    ViewBag.Title = "Tour Stops";
+}
+
+<h2>All Stops</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Venue")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AllConcerts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConcertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VenueName)
+            </td>
+            @*<td>
+                @Html.ActionLink("Remove Stop", "RemoveStop", new { id = item.ConcertId })
+            </td>*@
+        </tr>
+    }
+
+</table>
+
+<h2>All Concerts</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Venue")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AllConcerts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConcertDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VenueName)
+            </td>
+            <td>
+                @Html.ActionLink("Add Stop", "AddStop", new { id = item.ConcertId })
+            </td>
+        </tr>
+    }
+
+</table>

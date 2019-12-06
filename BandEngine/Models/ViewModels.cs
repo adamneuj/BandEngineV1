@@ -59,7 +59,8 @@ namespace BandEngine.Models
 
     public class TourViewModel
     {
-        public Tour Tour { get; set; }
-        public Address Address { get; set; }
+        public List<Concert> AllConcerts { get; set; }
+        public List<Concert> AllStops { get; set; }
+        public Tour CurrentTour { get; set; }
     }
 }
