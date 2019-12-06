@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BandEngine.Models.Tour>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    <h5>
+        @Html.ActionLink("Upcoming Concerts", "Index") |
+        @Html.ActionLink("Past Concerts", "PastConcerts") |
+        @Html.ActionLink("Tours", "Index", "Tour")
+    </h5>
+</p>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TourName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TourName)
+        </td>
+        <td>
+            @Html.ActionLink("Add Stops", "Stops", new { id=item.TourId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.TourId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -19,7 +19,9 @@ namespace BandEngine.Controllers
         // GET: Tour
         public ActionResult Index()
         {
-            return View();
+            Artist artist = GetCurrentArtist();
+            List<Tour> allTours = context.Tours.Where(t => t.ArtistId == artist.ArtistId).ToList();
+            return View(allTours);
         }
 
         // GET: Tour/Details/5
@@ -31,7 +33,8 @@ namespace BandEngine.Controllers
         // GET: Tour/Create
         public ActionResult Create()
         {
-            return View();
+            Tour tour = new Tour();
+            return View(tour);
         }
 
         // POST: Tour/Create

@@ -328,10 +328,10 @@
     <Content Include="Views\Concert\Details.cshtml" />
     <Content Include="Views\Album\Songs.cshtml" />
     <Content Include="Views\Shared\_ArtistLayout.cshtml" />
+    <Content Include="Views\Tour\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Tour\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
