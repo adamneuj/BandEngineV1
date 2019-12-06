@@ -52,6 +52,35 @@
 
     </dl>
 </div>
+
+@{
+    var ApiUrlStr = BandEngine.Private.ApiKey.GoogleUrl;
+    var ApiKeyStr = BandEngine.Private.ApiKey.GoogleKey;
+    var ApiKeyCbk = BandEngine.Private.ApiKey.GoogleCallback;
+    string googleMapsRequest = ApiUrlStr + ApiKeyStr + ApiKeyCbk;
+}
+
+<script async defer src=@googleMapsRequest>
+</script>
+<style>
+    #map {
+        width: 100%;
+        height: 400px;
+        background-color: grey;
+    }
+</style>
+
+<div id="map">
+    <script>
+        function initMap() {
+            var address = { lat: @Model.Address.Lat, lng: @Model.Address.Lng };
+            var map = new google.maps.Map(
+                document.getElementById('map'), { zoom: 12, center: address });
+            var marker = new google.maps.Marker({position: address, map: map});
+        }
+    </script>
+</div>
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
