@@ -69,6 +69,7 @@ namespace BandEngine.Controllers
                 concertInfo.FullAddress = ConcatAddress(concertInfo.Address);
                 tourInfo.AllStopInfo.Add(concertInfo);
             }
+            ViewBag.StopInfo = tourInfo.AllStopInfo;
             return View(tourInfo);
         }
 
