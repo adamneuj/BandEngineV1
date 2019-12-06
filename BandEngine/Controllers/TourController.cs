@@ -17,6 +17,7 @@ namespace BandEngine.Controllers
             context = new ApplicationDbContext();
         }
         // GET: Tour
+        [Authorize]
         public ActionResult Index()
         {
             Artist artist = GetCurrentArtist();
@@ -31,6 +32,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: Tour/Create
+        [Authorize]
         public ActionResult Create()
         {
             Tour tour = new Tour();
@@ -78,6 +80,7 @@ namespace BandEngine.Controllers
         }
 
         // GET: Tour/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             Tour tour = context.Tours.FirstOrDefault(t => t.TourId == id);

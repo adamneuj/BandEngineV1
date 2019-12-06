@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Create";
 }
+<p>
+    <h5>
+        @Html.ActionLink("Upcoming Concerts", "Index", "Concert") |
+        @Html.ActionLink("Past Concerts", "PastConcerts", "Concert") |
+        @Html.ActionLink("Tours", "Index", "Tour")
+    </h5>
+</p>
 
 <h2>Create a Tour</h2>
 
