@@ -12,6 +12,34 @@
     </h5>
 </p>
 
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Concert Attendance"
+	},
+	axisY:{
+		includeZero: false
+	},
+	data: [{
+		type: "line",
+		dataPoints: [
+			{ y: 100 },
+			{ y: 80 },
+			{ y: 45 }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <h2>Past Concerts</h2>
 
 <table class="table">
