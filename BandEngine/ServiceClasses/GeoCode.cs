@@ -39,7 +39,7 @@ namespace BandEngine.ServiceClasses
         }
         public static string FormatAddress(Address location)
         {
-            string address = location.address1 + " " + location.address2 + " " + location.city + " " + location.state + " " + location.zip;
+            string address = location.AddressLine1 + " " + location.AddressLine2 + " " + location.City + " " + location.State + " " + location.ZipCode;
             return address;
         }
 
