@@ -12,10 +12,10 @@
     </h5>
 </p>
 
-<h2>Index</h2>
+<h2>Tours</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Tour", "Create")
 </p>
 <table class="table">
     <tr>
@@ -31,8 +31,9 @@
             @Html.DisplayFor(modelItem => item.TourName)
         </td>
         <td>
-            @Html.ActionLink("Add Stops", "Stops", new { id=item.TourId })
-            @Html.ActionLink("Delete", "Delete", new { id=item.TourId })
+            @Html.ActionLink("Add Stops", "Stops", new { id = item.TourId }) |
+            @Html.ActionLink("Route", "Route", new { id = item.TourId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.TourId })
         </td>
     </tr>
 }

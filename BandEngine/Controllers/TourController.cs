@@ -39,12 +39,14 @@ namespace BandEngine.Controllers
 
         // POST: Tour/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Tour tour)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                Artist artist = GetCurrentArtist();
+                tour.ArtistId = artist.ArtistId;
+                context.Tours.Add(tour);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -78,17 +80,19 @@ namespace BandEngine.Controllers
         // GET: Tour/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Tour tour = context.Tours.FirstOrDefault(t => t.TourId == id);
+            return View(tour);
         }
 
         // POST: Tour/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Tour tour)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                Tour tourFromDb = context.Tours.FirstOrDefault(t => t.TourId == id);
+                context.Tours.Remove(tourFromDb);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
