@@ -9,8 +9,9 @@ html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
-body {
-  margin: 0;
+body .navbar-inverse {
+    margin: 0;
+    background-color: #6e2e3d;
 }
 article,
 aside,
