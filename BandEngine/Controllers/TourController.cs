@@ -31,10 +31,44 @@ namespace BandEngine.Controllers
             Artist artist = GetCurrentArtist();
             TourViewModel tourInfo = new TourViewModel()
             {
-                AllConcerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.ConcertDate > DateTime.Today).ToList(),
+                AllConcerts = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.ConcertDate > DateTime.Today && c.TourId == null).ToList(),
                 AllStops = context.Concerts.Where(c => c.ArtistId == artist.ArtistId && c.TourId == id).ToList(),
                 CurrentTour = context.Tours.FirstOrDefault(t => t.TourId == id)
             };
+            return View(tourInfo);
+        }
+
+        [Authorize]
+        public ActionResult AddStop(int id, int tourId)
+        {
+            Concert concert = context.Concerts.FirstOrDefault(c => c.ConcertId == id);
+            concert.TourId = tourId;
+            context.SaveChanges();
+            return RedirectToAction("Stops", new { id = tourId });
+        }
+
+        [Authorize]
+        public ActionResult RemoveStop(int id, int tourId)
+        {
+            Concert concert = context.Concerts.FirstOrDefault(c => c.ConcertId == id);
+            concert.TourId = null;
+            context.SaveChanges();
+            return RedirectToAction("Stops", new { id = tourId });
+        }
+
+        [Authorize]
+        public ActionResult Route(int id)
+        {
+            TourViewModel tourInfo = new TourViewModel();
+            tourInfo.AllStops = context.Concerts.Where(c => c.TourId == id).ToList();
+            foreach(Concert concert in tourInfo.AllStops)
+            {
+                ConcertViewModel concertInfo = new ConcertViewModel();
+                concertInfo.Concert = concert;
+                concertInfo.Address = context.Addresses.FirstOrDefault(a => a.AddressId == concert.AddressId);
+                concertInfo.FullAddress = ConcatAddress(concertInfo.Address);
+                tourInfo.AllStopInfo.Add(concertInfo);
+            }
             return View(tourInfo);
         }
 
@@ -121,6 +155,21 @@ namespace BandEngine.Controllers
             var userId = User.Identity.GetUserId();
             Artist currentArtist = context.Artists.FirstOrDefault(a => a.ApplicationId == userId);
             return currentArtist;
+        }
+
+        private string ConcatAddress(Address address)
+        {
+            string zipCode = address.ZipCode.ToString();
+            if (address.AddressLine2 != null)
+            {
+                string fullAddress = address.AddressLine1 + " " + address.AddressLine2 + ", " + address.City + ", " + address.State + " " + zipCode;
+                return fullAddress;
+            }
+            else
+            {
+                string fullAddress = address.AddressLine1 + ", " + address.City + ", " + address.State + " " + zipCode;
+                return fullAddress;
+            }
         }
     }
 }

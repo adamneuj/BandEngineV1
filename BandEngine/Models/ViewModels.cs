@@ -62,5 +62,6 @@ namespace BandEngine.Models
         public List<Concert> AllConcerts { get; set; }
         public List<Concert> AllStops { get; set; }
         public Tour CurrentTour { get; set; }
+        public List<ConcertViewModel> AllStopInfo { get; set; }
     }
 }
