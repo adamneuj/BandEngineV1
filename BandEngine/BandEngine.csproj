@@ -306,7 +306,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Artist\Create.cshtml" />
-    <Content Include="Views\Artist\Index.cshtml" />
     <Content Include="Views\Contact\Create.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\Conversations.cshtml" />
@@ -340,6 +339,7 @@
     <Content Include="Views\Tour\Stops.cshtml" />
     <Content Include="Views\Tour\Route.cshtml" />
     <Content Include="Views\Concert\Attendance.cshtml" />
+    <Content Include="Views\Artist\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
