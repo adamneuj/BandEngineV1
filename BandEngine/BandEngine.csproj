@@ -339,6 +339,7 @@
     <Content Include="Views\Tour\Delete.cshtml" />
     <Content Include="Views\Tour\Stops.cshtml" />
     <Content Include="Views\Tour\Route.cshtml" />
+    <Content Include="Views\Concert\Attendance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

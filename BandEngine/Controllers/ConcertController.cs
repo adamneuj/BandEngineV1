@@ -54,6 +54,22 @@ namespace BandEngine.Controllers
             return View(pastConcerts);
         }
 
+        [Authorize]
+        public ActionResult Attendance(int id)
+        {
+            Concert concert = context.Concerts.FirstOrDefault(c => c.ConcertId == id);
+            return View(concert);
+        }
+
+        [HttpPost]
+        public ActionResult Attendance(int id, Concert concert)
+        {
+            Concert concertFromDb = context.Concerts.FirstOrDefault(c => c.ConcertId == concert.ConcertId);
+            concertFromDb.Attendance = concert.Attendance;
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // GET: Concert/Details/5
         public ActionResult Details(int id)
         {
