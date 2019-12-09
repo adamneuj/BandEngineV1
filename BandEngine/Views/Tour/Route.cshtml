@@ -12,6 +12,7 @@
     var ApiKeyCbk = BandEngine.Private.ApiKey.GoogleCallback;
     string googleMapsRequest = ApiUrlStr + ApiKeyStr + ApiKeyCbk;
 
+
 }
 
 <script async defer src=@googleMapsRequest>
@@ -26,17 +27,25 @@
 
 <div id="map">
     <script>
+
         function initMap() {
+            @{var stopInfo = ViewBag.StopInfo}
+            var allStops = @(stopInfo);
+            var latArray = new Array();
+            var lngArray = new Array();
+            for (let i = 0; i < allStops.length; i++) {
+                latArray.push(allStops[i].Address.Lat);
+                lngArray.push(allStops[i].Address.Lng);
+            };
             var address = { lat: @Model.AllStopInfo[0].Address.Lat, lng: @Model.AllStopInfo[0].Address.Lng };
             var map = new google.maps.Map(
                 document.getElementById('map'), { zoom: 12, center: address });
-            var allStops;
-                for (let i = 0; i < @Model.AllStopInfo.Count; i++) {
-                    var marker = new google.maps.Marker({
-                    lat: ,
-                    lng: ,
-                    map: map
-                        });
+            for (let i = 0; i < @Model.AllStopInfo.Count(); i++) {
+                var marker = new google.maps.Marker({
+                lat: latArray[i],
+                lng: lngArray[i],
+                map: map
+                    });
             }
             
 

@@ -61,6 +61,7 @@ namespace BandEngine.Controllers
         {
             TourViewModel tourInfo = new TourViewModel();
             tourInfo.AllStops = context.Concerts.Where(c => c.TourId == id).ToList();
+            tourInfo.AllStopInfo = new List<ConcertViewModel>();
             foreach(Concert concert in tourInfo.AllStops)
             {
                 ConcertViewModel concertInfo = new ConcertViewModel();
@@ -69,7 +70,8 @@ namespace BandEngine.Controllers
                 concertInfo.FullAddress = ConcatAddress(concertInfo.Address);
                 tourInfo.AllStopInfo.Add(concertInfo);
             }
-            ViewBag.StopInfo = tourInfo.AllStopInfo;
+            ConcertViewModel[] infoArray = tourInfo.AllStopInfo.ToArray();
+            ViewBag.StopInfo = infoArray;
             return View(tourInfo);
         }
 

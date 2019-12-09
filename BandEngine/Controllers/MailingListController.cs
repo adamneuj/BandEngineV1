@@ -1,5 +1,7 @@
 ﻿using BandEngine.Models;
+using MailKit;
 using Microsoft.AspNet.Identity;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
