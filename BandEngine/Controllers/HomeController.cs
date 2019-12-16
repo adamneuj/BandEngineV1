@@ -21,7 +21,7 @@ namespace BandEngine.Controllers
             var artist = GetCurrentArtist();
             if(artist != null)
             {
-                RedirectToAction("Index", "Artist");
+                return RedirectToAction("Index", "Artist");
             }
             return View();
         }

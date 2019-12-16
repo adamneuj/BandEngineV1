@@ -69,4 +69,11 @@ namespace BandEngine.Models
     {
         public List<ArtistTask> RecommendedTasks { get; set; }
     }
+
+    public class ArtistTaskViewModel
+    {
+        public List<ArtistTask> NotStarted { get; set; }
+        public List<ArtistTask> InProgress { get; set; }
+        public List<ArtistTask> Completed { get; set; }
+    }
 }
