@@ -24,8 +24,14 @@ namespace BandEngine.Controllers
         public ActionResult Index()
         {
             Artist artist = GetCurrentArtist();
-            List<ArtistTask> currentTasks = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "Not Started").ToList();
-            return View(currentTasks);
+            ArtistTaskViewModel artistTaskInfo = new ArtistTaskViewModel()
+            {
+                NotStarted = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "Not Started").ToList(),
+                InProgress = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "In Progress").ToList(),
+                Completed = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "Completed").ToList()
+            };
+            //List<ArtistTask> currentTasks = context.ArtistTasks.Where(a => a.ArtistId == artist.ArtistId && a.Progress == "Not Started").ToList();
+            return View(artistTaskInfo);
         }
 
         [Authorize]

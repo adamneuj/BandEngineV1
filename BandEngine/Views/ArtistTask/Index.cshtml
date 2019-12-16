@@ -1,52 +1,113 @@
-﻿@model IEnumerable<BandEngine.Models.ArtistTask>
+﻿@model BandEngine.Models.ArtistTaskViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
+<h2>Tasks</h2>
+
+<p>
+    @Html.ActionLink("Create New Task", "Create")
+</p>
+
 <div class="row">
     <div class="col-md-12">
-        <h5>
-            <p>
-                @Html.ActionLink("Not Started", "Index") |
-                @Html.ActionLink("In Progress", "InProgress") |
-                @Html.ActionLink("Completed", "Completed")
-            </p>
-        </h5>
+        <h3>In Progress</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
+                <th>
+                    @Html.DisplayName("Progress")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.InProgress)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Progress)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TaskId }) |
+                        @Html.ActionLink("Complete", "Move", new { id = item.TaskId })
+                    </td>
+                </tr>
+            }
+
+        </table>
     </div>
 </div>
 
-<h2>Not Started Tasks</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Not Started</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
+                <th>
+                    @Html.DisplayName("Progress")
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+            @foreach (var item in Model.NotStarted)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Progress)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TaskId }) |
+                        @Html.ActionLink("Start", "Move", new { id = item.TaskId })
+                    </td>
+                </tr>
+            }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Progress)
-        </th>
-        <th></th>
-    </tr>
+        </table>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Progress)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId }) |
-            @Html.ActionLink("Move to In Progress", "Move", new { id=item.TaskId})
-        </td>
-    </tr>
-}
+    <div class="col-md-6">
+        <h3>Completed</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
+                <th>
+                    @Html.DisplayName("Progress")
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model.Completed)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Progress)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TaskId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TaskId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

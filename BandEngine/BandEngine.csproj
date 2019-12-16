@@ -326,7 +326,7 @@
     <Content Include="Views\MailingList\Index.cshtml" />
     <Content Include="Views\MailingList\Create.cshtml" />
     <Content Include="Views\MailingList\Delete.cshtml" />
-    <Content Include="Views\ArtistTask\Index.cshtml" />
+    <Content Include="Views\ArtistTask\Index3.cshtml" />
     <Content Include="Views\ArtistTask\Create.cshtml" />
     <Content Include="Views\ArtistTask\Delete.cshtml" />
     <Content Include="Views\ArtistTask\InProgress.cshtml" />
@@ -350,7 +350,7 @@
     <Content Include="Views\Tour\Route.cshtml" />
     <Content Include="Views\Concert\Attendance.cshtml" />
     <Content Include="Views\Artist\Index.cshtml" />
-    <Content Include="Views\ArtistTask\Index2.cshtml" />
+    <Content Include="Views\ArtistTask\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
