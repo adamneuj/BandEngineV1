@@ -64,7 +64,7 @@ namespace BandEngine.Controllers
             {
                 task.Progress = "Completed";
                 context.SaveChanges();
-                return RedirectToAction("InProgress");
+                return RedirectToAction("Index");
             }
             return View();
         }

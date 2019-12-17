@@ -22,3 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.greenbackground {
+    background-color: #99e1d9;
+}
+
+.redbackground {
+    background-color: #f7567c;
+}
+
+.yellowbackground {
+    background-color: #fffae3;
+}
+
+.tableborder{
+    border: 3px;
+}
